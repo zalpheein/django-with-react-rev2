@@ -1,8 +1,13 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="{% static 'bootstrap-4.6.1-dis/css/bootstrap.min.css' %}">
+    <script src="{% static 'jquery-3.6.0.min.js' %}" ></script>
+    <script src="{% static 'bootstrap-4.6.1-dis/js/bootstrap.min.js' %}" ></script>
 </head>
 <body>
     {% block content %}
