@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     # Local Apps
     'accounts',
+
 ]
 
 MIDDLEWARE = [
@@ -92,6 +93,9 @@ DATABASES = {
     }
 }
 
+
+# 선언 이후에 makemigrations 앱 + migrate 를 반드시 해야 함.
+AUTH_USER_MODEL = "accounts.User"
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
