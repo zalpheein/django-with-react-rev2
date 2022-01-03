@@ -93,8 +93,8 @@ DATABASES = {
     }
 }
 
-
-# 선언 이후에 makemigrations 앱 + migrate 를 반드시 해야 함.
+# accounts 앱에서 추가로 사용자 정보 관련 필드(website_url, boi)를 추가 하였기 때문에 다음과 같이 선언
+# 선언 이후에 반드시 makemigrations 앱 + migrate 를 반드시 해야 함.
 AUTH_USER_MODEL = "accounts.User"
 
 # Password validation
