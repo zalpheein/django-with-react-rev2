@@ -134,11 +134,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     # 프로젝트 전반에서 사용되는 정적인 파일들의 저장 경로
     os.path.join(BASE_DIR, 'askcompany', 'static'),
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 MEDIA_URL = '/media/'
