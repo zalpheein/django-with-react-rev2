@@ -14,7 +14,7 @@ import os
 from os.path import abspath, dirname
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-# settings 폴더 내부로 가져 왔으므로 BASE_DIR 의 경로를 맟추려면 dirname 을 한번더 호출 함
+# settings 폴더 내부로 가져 왔으므로 BASE_DIR 의 경로를 맟추려면 dirname 을 한번더 호출 해야 함
 BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
 
 
