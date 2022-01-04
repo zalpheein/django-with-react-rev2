@@ -9,6 +9,8 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
+            # 프런트에 message 내용이 노출 되어야 함으로...
+            # askcompany/templates/layout.html 에 관련 내용을 삽입 해야 함
             messages.success(request, "회원가입 환영합니다.")
             return redirect("/")
     else:

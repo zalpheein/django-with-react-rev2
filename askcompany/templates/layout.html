@@ -15,6 +15,14 @@ STATICFILES_DIRS 에서 정의 한 정적파일 위치 askcompany/static/ 여기
         <script src="{% static 'bootstrap-4.6.1-dis/js/bootstrap.min.js' %}" ></script>
     </head>
     <body>
+        {% if messages %}
+            {% if message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endif %}
+        {% endif %}
+
         <div class="border-bottom mb-3 ">
             <div class="container">
                 <div class="row">
