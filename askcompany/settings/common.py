@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     # Third Party Apps
     'debug_toolbar',
+    'bootstrap4',
 
     # Local Apps
     'accounts',
