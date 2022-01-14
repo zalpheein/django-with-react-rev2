@@ -1,6 +1,14 @@
 from django.contrib import messages
+from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, render
 from .forms.forms import SignupForm
+
+
+# 로그인 구현
+#   순수 자체 제작 함수
+#   LoginView() 사용
+#   LoginView 를 상속 받은 클래스를 사용
+login = LoginView.as_view(template_name="accounts/login_form.html")
 
 
 def signup(request):
