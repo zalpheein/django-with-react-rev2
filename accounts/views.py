@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth import login as auth_login
 from django.contrib.auth.views import LoginView, logout_then_login  # LogoutView
 from django.shortcuts import redirect, render
 from .forms.forms import SignupForm
@@ -13,6 +14,7 @@ login = LoginView.as_view(template_name="accounts/login_form.html")
 
 # logout = LogoutView.as_view()
 def logout(request):
+    messages.success(request, "로그아웃 되었습니다.")
     return logout_then_login(request)
 
 
@@ -22,10 +24,16 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             signed_user = form.save()
+
+            # 회원가입 환영 메시지 처리...
             # 프런트에 message 내용이 노출 되어야 함으로...
             # askcompany/templates/layout.html 에 관련 내용을 삽입 해야 함
             messages.success(request, "회원가입 환영합니다.")
 
+            # 회원가입과 동시에 로그인 처리....
+            auth_login(request, signed_user)
+
+            # 회원가입 시 이메일 발송
             # 여기에 회원가입 환영 이메일을 보내는 기능을 정의 하거나 함수를 호출 할수 있음
             # 메일 발송 함수 정의는 views.py 에 정의 하는 것보다는
             #   장고의 시그널을 사용 할수도...
