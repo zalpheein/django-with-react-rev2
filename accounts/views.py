@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, logout_then_login  # LogoutView
 from django.shortcuts import redirect, render
 from .forms.forms import SignupForm
 
@@ -9,6 +9,11 @@ from .forms.forms import SignupForm
 #   LoginView() 사용
 #   LoginView 를 상속 받은 클래스를 사용
 login = LoginView.as_view(template_name="accounts/login_form.html")
+
+
+# logout = LogoutView.as_view()
+def logout(request):
+    return logout_then_login(request)
 
 
 def signup(request):
