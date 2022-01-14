@@ -149,9 +149,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 INTERNAL_IPS = ['127.0.0.1']
 
 # Email with SEND Grid
-SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
 EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+# 회원가입 후, 이메일 발송 영역에서 사용 할 목적으로 선언
+ADMINS = [
+    ('Chinseok Lee', 'me@askcompany.kr'),
+]
+
+WELCOME_EMAIL_SENDER = "me@askcompany.kr"
