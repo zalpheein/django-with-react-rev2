@@ -12,6 +12,7 @@ def signup(request):
             # 프런트에 message 내용이 노출 되어야 함으로...
             # askcompany/templates/layout.html 에 관련 내용을 삽입 해야 함
             messages.success(request, "회원가입 환영합니다.")
+            # next 인자의 값을 알아오는데.. next 인자가 없을 경우 두 번째 인자를 반환
             next_url = request.GET.get('next', '/')
             return redirect(next_url)
     else:

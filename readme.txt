@@ -50,7 +50,8 @@ Git 연동
 
 
 
-
+이메일 발송용 Web API 사용
+https://docs.sendgrid.com/for-developers/sending-email/django
 
 
 
