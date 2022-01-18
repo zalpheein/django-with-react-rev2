@@ -20,8 +20,9 @@ class User(AbstractUser):
     gender = models.CharField(max_length=1,
                               blank=True,
                               choices=GenderChoices.choices)
-    profile = models.ImageField(blank=True,
-                                upload_to='accounts/profile/%Y/%m/%d')
+    avatar = models.ImageField(blank=True,
+                                upload_to='accounts/avatar/%Y/%m/%d',
+                               help_text='48px * 48px 크기의 png/jpg 파일을 업로드 해주세요.')
 
     def send_welcome_email(self):
         # 제목과 내용을 하드 코딩 할 수 있으나...템플릿을 활용 하기를 추천...(템플릿 파일명은 무관함)
