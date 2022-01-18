@@ -42,7 +42,6 @@ def signup(request):
             #   Celery를 활용 할것을 제안함...
             signed_user.send_welcome_email()
 
-
             # next 인자의 값을 알아오는데.. next 인자가 없을 경우 두 번째 인자를 반환
             next_url = request.GET.get('next', '/')
 

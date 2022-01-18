@@ -1,2 +1,5 @@
 django~=3.0.0
- django-bootstrap4
+
+django-bootstrap4
+pillow
+#django-pydenticon      # 설치 할지 말것...

@@ -34,7 +34,9 @@ STATICFILES_DIRS 에서 정의 한 정적파일 위치 askcompany/static/ 여기
                             <nav class="my-2 my-md-0 mr-md-3">
                                 <a class="p-2 text-dark" href="#">Features</a>
                                 <a class="p-2 text-dark" href="#">Enterprise</a>
-                                <a class="p-2 text-dark" href="#">Support</a>
+                                <a class="p-2 text-dark" href="#">
+                                    {{ user }}
+                                </a>
                             </nav>
                             <a class="btn btn-outline-primary" href="#">Sign up</a>
                         </div>
