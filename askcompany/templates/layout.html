@@ -32,9 +32,9 @@ STATICFILES_DIRS 에서 정의 한 정적파일 위치 askcompany/static/ 여기
                                 <img src="{% static 'logo.png' %}" alt="Insatgram">
                             </h5>
                             <nav class="my-2 my-md-0 mr-md-3">
-                                <a class="p-2 text-dark" href="#">Features</a>
-                                <a class="p-2 text-dark" href="#">Enterprise</a>
-                                <a class="p-2 text-dark" href="#">
+                                <a class="p-2 text-dark" href="#">사람 찾기</a>
+                                <a class="p-2 text-dark" href="#">활동 피드</a>
+                                <a class="p-2 text-dark" href="{% url 'profile_edit' %}">
                                     {{ user }}
                                 </a>
                             </nav>
