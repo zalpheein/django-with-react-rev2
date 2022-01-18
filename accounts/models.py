@@ -14,8 +14,12 @@ class User(AbstractUser):
 
     website_url = models.URLField(blank=True)
     bio = models.TextField(blank=True)
-    phone_number = models.CharField(validators=[RegexValidator(r"^010-?[1-9]\d{3}-?\d{4}$")])
-    gender = models.CharField(choices=GenderChoices.choices)
+    phone_number = models.CharField(max_length=13,
+                                    blank=True,
+                                    validators=[RegexValidator(r"^010-?[1-9]\d{3}-?\d{4}$")])
+    gender = models.CharField(max_length=1,
+                              blank=True,
+                              choices=GenderChoices.choices)
 
     def send_welcome_email(self):
         # 제목과 내용을 하드 코딩 할 수 있으나...템플릿을 활용 하기를 추천...(템플릿 파일명은 무관함)
