@@ -2,13 +2,20 @@
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.core.mail import send_mail
+from django.core.validators import RegexValidator
 from django.db import models
 from django.template.loader import render_to_string
 
 
 class User(AbstractUser):
+    class GenderChoices(models.TextChoices):
+        MALE = "M", "남성"
+        FEMALE = "F", "여성"
+
     website_url = models.URLField(blank=True)
     bio = models.TextField(blank=True)
+    phone_number = models.CharField(validators=[RegexValidator(r"^010-?[1-9]\d{3}-?\d{4}$")])
+    gender = models.CharField(choices=GenderChoices.choices)
 
     def send_welcome_email(self):
         # 제목과 내용을 하드 코딩 할 수 있으나...템플릿을 활용 하기를 추천...(템플릿 파일명은 무관함)
