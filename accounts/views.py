@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import login as auth_login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, logout_then_login  # LogoutView
 from django.shortcuts import redirect, render
 from .forms.forms import SignupForm
@@ -54,3 +55,10 @@ def signup(request):
                         'form': form,
                     }
                 )
+
+
+@login_required
+def profile_edit(request):
+    return render(request, "accounts/profile_edit_form.html", {
+
+    })
