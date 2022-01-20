@@ -1,10 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView, logout_then_login  # LogoutView
+from django.contrib.auth.views import LoginView, logout_then_login, PasswordChangeView  # LogoutView
 from django.shortcuts import redirect, render
 from .forms.forms import SignupForm, ProfileForm
-
 
 # 로그인 구현
 #   순수 자체 제작 함수
@@ -20,7 +19,6 @@ def logout(request):
 
 
 def signup(request):
-
     if request.method == "POST":
         form = SignupForm(request.POST)
         if form.is_valid():
@@ -51,9 +49,9 @@ def signup(request):
         form = SignupForm()
 
     return render(request, 'accounts/signup_form.html', {
-                        'form': form,
-                    }
-                )
+        'form': form,
+    }
+                  )
 
 
 @login_required
@@ -71,3 +69,8 @@ def profile_edit(request):
     return render(request, "accounts/profile_edit_form.html", {
         "form": form
     })
+
+
+@login_required
+def password_change(request):
+    pass
