@@ -83,6 +83,7 @@ def profile_edit(request):
 # AuthPasswordChangeView 은 장고 기본 제공 PasswordChangeView 의 사용자 정의 이름
 class PasswordChangeView(LoginRequiredMixin, AuthPasswordChangeView):
     success_url = reverse_lazy("password_chang")
+    template_name = "accounts/password_change_form.html"
 
 
 password_change = PasswordChangeView.as_view()
