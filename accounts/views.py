@@ -1,7 +1,13 @@
 from django.contrib import messages
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView, logout_then_login, PasswordChangeView  # LogoutView
+from django.contrib.auth.mixins import LoginRequiredMixin
+# 콤마(,) 로 구분 되는 모든 값들을 튜플(tuple)로 처리 가능
+# from django.contrib.auth.views import LoginView, logout_then_login, PasswordChangeView as AuthPasswordChangeView
+from django.contrib.auth.views import (
+    LoginView, logout_then_login,
+    PasswordChangeView as AuthPasswordChangeView,
+)
 from django.shortcuts import redirect, render
 from .forms.forms import SignupForm, ProfileForm
 
@@ -71,6 +77,13 @@ def profile_edit(request):
     })
 
 
-@login_required
-def password_change(request):
+# 장고 기본 제공 PasswordChangeView 를 활용하여 사용자 정의형으로 재가공 하여 비번을 변경하는 로직
+# class PasswordChangeView 은 AuthPasswordChangeView 를 상속 받아 생성
+# AuthPasswordChangeView 은 장고 기본 제공 PasswordChangeView 의 사용자 정의 이름
+class PasswordChangeView(LoginRequiredMixin, AuthPasswordChangeView):
     pass
+
+
+password_change = PasswordChangeView.as_view()
+
+
