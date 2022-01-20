@@ -21,7 +21,7 @@ class User(AbstractUser):
                               blank=True,
                               choices=GenderChoices.choices)
     avatar = models.ImageField(blank=True,
-                                upload_to='accounts/avatar/%Y/%m/%d',
+                               upload_to='accounts/avatar/%Y/%m/%d',
                                help_text='48px * 48px 크기의 png/jpg 파일을 업로드 해주세요.')
 
     def send_welcome_email(self):
@@ -46,8 +46,7 @@ class User(AbstractUser):
     #     if is_created:
     #         # 메일 발송 로직 정의...
 
-
-#새로운 테이블을 만들고 추가 필드를 다음과 같이 정의 할수도 있지만
+# 새로운 테이블을 만들고 추가 필드를 다음과 같이 정의 할수도 있지만
 # 기본 제공 되는 AbstractUser 를 상속받은 class User 를 만들어 위와 같이 필드를 추가 할 수도 있음... 추천 방식
 # 이렇게 필드를 추가 할 경우 common.py(기존의 settings.py) 에 다음 항목 추가
 # 보통 DB 관련 이므로... DB 정의부 밑에 선언
@@ -55,8 +54,3 @@ class User(AbstractUser):
 
 # class Profile(models.Model):
 #     pass
-
-
-
-
-

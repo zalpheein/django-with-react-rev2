@@ -37,15 +37,14 @@ def signup(request):
             # 회원가입 시 이메일 발송
             # 여기에 회원가입 환영 이메일을 보내는 기능을 정의 하거나 함수를 호출 할수 있음
             # 메일 발송 함수 정의는 views.py 에 정의 하는 것보다는
-            #   장고의 시그널을 사용 할수도...
-            #   models.py 의 class User 에서 함수를 정의의...할 것을 추천
+            #   장고의 시그널을 사용 할수도 있고...
+            #   models.py 의 class User 에서 함수를 정의 할수도 있다...본 방식을 추천
             #   회원가입과 메일 발송이 연속적이어서.. 회원가입 처리가 늦어지는 현상 발생
-            #   Celery를 활용 할것을 제안함...
+            #   Celery 를 활용 할것을 제안함...
             signed_user.send_welcome_email()
 
             # next 인자의 값을 알아오는데.. next 인자가 없을 경우 두 번째 인자를 반환
             next_url = request.GET.get('next', '/')
-
 
             return redirect(next_url)
     else:
