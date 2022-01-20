@@ -10,7 +10,7 @@ from django.contrib.auth.views import (
 )
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from .forms.forms import SignupForm, ProfileForm
+from .forms.forms import SignupForm, ProfileForm, PasswordChangeForm
 
 # 로그인 구현
 #   순수 자체 제작 함수
@@ -84,6 +84,18 @@ def profile_edit(request):
 class PasswordChangeView(LoginRequiredMixin, AuthPasswordChangeView):
     success_url = reverse_lazy("password_chang")
     template_name = "accounts/password_change_form.html"
+    form_class = PasswordChangeForm
+
+    # 비번 변경 시, 사용자에게 변경이 완료 되었다는 메시지 노출하기 위해
+    # 미 해결 문제 : 구 암호와 신 암호를 동일하게 입력 해도 암호 변경이 성공됨.. 이를 해결 해야함
+    # 그래서 위에 form_class = PasswordChangeForm 라인이 추가 됨
+    def form_valid(self, form):
+        messages.success(self.request, "암호를 변경했습니다.")
+        return super().form_valid(form)
+
+    # 비번 변경 성공 시 랜당할 랜딩 페이지 주소
+    # 비번 변경에 사용할 템플릿 지정
+    # 비번 변경에 사용할/적용할 로직을 담음 폼 클래스 지정
 
 
 password_change = PasswordChangeView.as_view()

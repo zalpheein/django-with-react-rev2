@@ -1,5 +1,8 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import (
+    UserCreationForm,
+    PasswordChangeForm as AuthPasswordChangeForm,
+)
 from ..models import User
 
 
@@ -38,7 +41,9 @@ class ProfileForm(forms.ModelForm):
         fields = ['avatar', 'first_name', 'last_name',
                   'website_url', 'bio', 'phone_number', 'gender']
 
-
+# 장고 기본 제공 PasswordChangeForm 을 AuthPasswordChangeForm 로 재명명한 클래스를 상속 받은 class PasswordChangeForm 를 정의
+class PasswordChangeForm(AuthPasswordChangeForm):
+    pass
 
 
 
