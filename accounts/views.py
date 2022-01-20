@@ -9,6 +9,7 @@ from django.contrib.auth.views import (
     PasswordChangeView as AuthPasswordChangeView,
 )
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from .forms.forms import SignupForm, ProfileForm
 
 # 로그인 구현
@@ -81,7 +82,7 @@ def profile_edit(request):
 # class PasswordChangeView 은 AuthPasswordChangeView 를 상속 받아 생성
 # AuthPasswordChangeView 은 장고 기본 제공 PasswordChangeView 의 사용자 정의 이름
 class PasswordChangeView(LoginRequiredMixin, AuthPasswordChangeView):
-    pass
+    success_url = reverse_lazy("password_chang")
 
 
 password_change = PasswordChangeView.as_view()
