@@ -41,9 +41,17 @@ class ProfileForm(forms.ModelForm):
         fields = ['avatar', 'first_name', 'last_name',
                   'website_url', 'bio', 'phone_number', 'gender']
 
-# 장고 기본 제공 PasswordChangeForm 을 AuthPasswordChangeForm 로 재명명한 클래스를 상속 받은 class PasswordChangeForm 를 정의
+
+# 장고 기본 제공 PasswordChangeForm 을 AuthPasswordChangeForm 로 재 명명한
+# 클래스를 상속 받은 사용자 정의 class PasswordChangeForm 을 정의
+# password2 를 기준으로 동일 비번 입력 여부를 조사
 class PasswordChangeForm(AuthPasswordChangeForm):
-    pass
+    def clean_new_password2(self):
+        old_password = self.cleaned_data.get('old_password')
+        new_password2 = super().clean_new_password2()
+        if old_password == new_password2:
+            raise forms.ValidationError("새로운 암호는 기존 암호와 다르게 입력해주세요")
+        return new_password2
 
 
 
