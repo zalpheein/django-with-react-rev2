@@ -10,6 +10,12 @@ class Post(models.Model):
     tag_set = models.ManyToManyField('Tag', blank=True)
     location = models.CharField(max_length=100, blank=True)
 
+    def __str__(self):
+        return self.caption
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name
