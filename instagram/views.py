@@ -21,13 +21,13 @@ def post_new(request):
             # author 값 지정하기
             post.author = request.user
 
-            # tag_set 값 지정하기
-            # post.tag_set =
-
-            # 그리고 나서 post 를 저장
+            # post 를 저장을 먼저 하고 tag 를 저장 해야 함
             post.save()
 
-
+            # tag_set 값 지정하기
+            # post.extract_tag_list() 가 list 형태 이므로 * 을 붙여서 한번에 처리
+            # 단, post 저장이 선행 되어야 함...
+            post.tag_set.add(*post.extract_tag_list())
 
             messages.success(request, "포스팅을 저장 하였습니다.")
 
