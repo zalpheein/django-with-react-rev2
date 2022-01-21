@@ -18,6 +18,7 @@ def post_new(request):
     else:
         form = PostForm()
 
+    # 당연히 templates/instagram/post_form.html 파일이 존재 해야 함....
     return render(request, "instagram/post_form.html", {
         "form": form,
     })
