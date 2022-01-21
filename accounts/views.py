@@ -14,8 +14,8 @@ from .forms.forms import SignupForm, ProfileForm, PasswordChangeForm
 
 # 로그인 구현
 #   순수 자체 제작 함수
-#   LoginView() 사용
-#   LoginView 를 상속 받은 클래스를 사용
+#   LoginView() 사용 <--- 이 방법을 사용함
+#   LoginView 를 상속 받은 클래스를 사용 <-- 이 방법은 [비번 변경] 방식을 참조 할 것
 login = LoginView.as_view(template_name="accounts/login_form.html")
 
 
@@ -82,6 +82,9 @@ def profile_edit(request):
 # class PasswordChangeView 은 AuthPasswordChangeView 를 상속 받아 생성
 # AuthPasswordChangeView 은 장고 기본 제공 PasswordChangeView 의 사용자 정의 이름
 class PasswordChangeView(LoginRequiredMixin, AuthPasswordChangeView):
+    # 비번 변경 성공 시 랜당할 랜딩 페이지 주소
+    # 비번 변경에 사용할 템플릿 지정
+    # 비번 변경에 사용할/적용할 로직을 담음 폼 클래스 지정
     success_url = reverse_lazy("password_change")
     template_name = "accounts/password_change_form.html"
     form_class = PasswordChangeForm
@@ -91,11 +94,10 @@ class PasswordChangeView(LoginRequiredMixin, AuthPasswordChangeView):
     # 그래서 위에 form_class = PasswordChangeForm 라인이 추가 됨
     def form_valid(self, form):
         messages.success(self.request, "암호를 변경했습니다.")
-        return super().form_valid(form)
 
-    # 비번 변경 성공 시 랜당할 랜딩 페이지 주소
-    # 비번 변경에 사용할 템플릿 지정
-    # 비번 변경에 사용할/적용할 로직을 담음 폼 클래스 지정
+        # super().form_valid(form) 가 호출 되면서 내부적으로 비번이 변경 되어짐
+        # https://github.com/django/django/blob/main/django/contrib/auth/views.py 의 356번째 라인 참조
+        return super().form_valid(form)
 
 
 password_change = PasswordChangeView.as_view()

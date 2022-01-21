@@ -23,6 +23,7 @@ class SignupForm(UserCreationForm):
         fields = ['username', 'email', 'first_name', 'last_name']
 
     def clean_email(self):
+        # 입력 받은 email 을 가져오기
         email = self.cleaned_data.get('email')
         if email:
             qs = User.objects.filter(email=email)
@@ -42,10 +43,12 @@ class ProfileForm(forms.ModelForm):
                   'website_url', 'bio', 'phone_number', 'gender']
 
 
-# 장고 기본 제공 PasswordChangeForm 을 AuthPasswordChangeForm 로 재 명명한
-# 클래스를 상속 받은 사용자 정의 class PasswordChangeForm 을 정의
+# 장고 기본 제공 PasswordChangeForm 을 AuthPasswordChangeForm 로 재 명명
+# 재 명명한 클래스를 상속 받은 사용자 정의 class PasswordChangeForm 을 정의
+# (단순히 비번을 변경 하는 것이므로 class Meta 를 별도로 정의 할 필요가 없음)
 # password1 를 기준으로 동일 비번 입력 여부를 조사
 class PasswordChangeForm(AuthPasswordChangeForm):
+
     def clean_new_password1(self):
         old_password = self.cleaned_data.get('old_password')
         new_password1 = self.cleaned_data.get('new_password1')
