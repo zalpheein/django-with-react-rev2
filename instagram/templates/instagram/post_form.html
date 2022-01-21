@@ -1,12 +1,15 @@
-<!-- 본 파일 생성 후, accounts/templates/accounts/signup_form.html 파일의 내용을 복붙 -->
-{% extends "accounts/layout.html" %}
+<!--
+    본 파일 생성 후, accounts/templates/accounts/signup_form.html 파일의 내용을 복붙
+    instagram/layout.html 로 변경
+-->
+{% extends "instagram/layout.html" %}
 {% load bootstrap4 %}
 
 {% block content %}
     <div class="container">
         <div class="row">
             <div class="col-sm-6 offset-sm-3">
-                {% include "_form.html" with form_title="회원가입" submit_label="회원가입" %}
+                {% include "_form.html" with form_title="새 포스팅 쓰기" submit_label="새 포스팅 쓰기" %}
             </div>
         </div>
     </div>
