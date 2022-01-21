@@ -14,6 +14,7 @@ class Post(models.Model):
         return self.caption
 
 
+
 class Tag(models.Model):
     name = models.CharField(max_length=50, unique=True)
 
