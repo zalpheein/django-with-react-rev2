@@ -17,7 +17,12 @@ class Post(models.Model):
         return self.caption
 
     def extract_tag_list(self):
-        return re.findall(r"#([a-zA-Z\dㄱ-힝]+)", self.caption)
+        tag_name_list = re.findall(r"#([a-zA-Z\dㄱ-힝]+)", self.caption)
+        tag_list = []
+        for tag_name in tag_name_list:
+            tag, _ = Tag.objects.get_or_create(name=tag_name)
+            tag_list.append(tag)
+        return tag_list
 
 
 class Tag(models.Model):
