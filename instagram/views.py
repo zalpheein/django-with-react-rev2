@@ -7,9 +7,26 @@ from .forms import PostForm
 @login_required
 def post_new(request):
     if request.method == "POST":
+        # PostForm 에 사용자 입력 데이터를 채우라는 의미 +++++++++++++++
         form = PostForm(request.POST, request.FILES)
+
+        # 그리고 나서 form 을 검증
         if form.is_valid():
-            post = form.save()
+            # post = form.save()
+            # form 의 fields 에서 author 를 제외 하였기에 commit=False 처리하여 즉시 저장을 제한함
+            # 왜? 필수 입력값인 author 와 tage_set 값을 지정 해야 하므로
+            post = form.save(commit=False)
+
+            # author 값 지정하기
+            post.author = request.user
+
+            # tag_set 값 지정하기
+            # post.tag_set =
+
+            # 그리고 나서 post 를 저장
+            post.save()
+
+
 
             messages.success(request, "포스팅을 저장 하였습니다.")
 
