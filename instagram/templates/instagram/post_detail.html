@@ -4,14 +4,21 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <!-- 여기서 name 은 accounts.models.User 에 속성(property)으로 정의 됨 -->
-                {{ post.author.name }}
-                <!-- 만약 photo 필드가 필수가 아닌 경우, if 문으로 예외 처리가 필요 함 -->
-                <img src="{{ post.photo.url }}" alt="{{ post.photo.caption }}">
-
-                {% for tag in post.tag_set.all %}
-                    {{ tag }}
-                {% endfor %}
+                <div class="card">
+                    <div class="card-header">
+                        <!-- 여기서 name 은 accounts.models.User 에 속성(property)으로 정의 됨 -->
+                        {{ post.author.name }}
+                    </div>
+                    <div class="card-body">
+                        <!-- 만약 photo 필드가 필수가 아닌 경우, if 문으로 예외 처리가 필요 함 -->
+                        <img src="{{ post.photo.url }}" alt="{{ post.photo.caption }}">
+                    </div>
+                    <div class="card-footer">
+                        {% for tag in post.tag_set.all %}
+                            {{ tag }}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
