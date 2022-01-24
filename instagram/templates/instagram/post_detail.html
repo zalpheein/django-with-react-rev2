@@ -7,7 +7,8 @@
                 <!-- 여기서 name 은 accounts.models.User 에 속성(property)으로 정의 됨 -->
                 {{ post.author.name }}
                 <!-- 만약 photo 필드가 필수가 아닌 경우, if 문으로 예외 처리가 필요 함 -->
-                {{ post.photo.url }}
+                <img src="{{ post.photo.url }}" alt="{{ post.photo.caption }}">
+
                 {% for tag in post.tag_set.all %}
                     {{ tag }}
                 {% endfor %}
