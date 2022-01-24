@@ -24,6 +24,11 @@ class User(AbstractUser):
                                upload_to='accounts/avatar/%Y/%m/%d',
                                help_text='48px * 48px 크기의 png/jpg 파일을 업로드 해주세요.')
 
+    # 글 작성자 정보가 필요 할 경우 사용 할 목적으로 속성 추가
+    @property
+    def name(self):
+        return f"{self.first_name} {self.last_name}"
+
     def send_welcome_email(self):
         # 제목과 내용을 하드 코딩 할 수 있으나...템플릿을 활용 하기를 추천...(템플릿 파일명은 무관함)
         # subject = "Instagram 가입을 환영 합니다."
