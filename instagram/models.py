@@ -2,6 +2,7 @@
 import re
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 
 
 class Post(models.Model):
@@ -16,6 +17,7 @@ class Post(models.Model):
     def __str__(self):
         return self.caption
 
+    # 신규 포스트 저장 하면서... caption 에서 # 이 붙은 문자을 찾아 Tag 대상을 뽑아 내는 함수
     def extract_tag_list(self):
         tag_name_list = re.findall(r"#([a-zA-Z\dㄱ-힝]+)", self.caption)
         tag_list = []
@@ -23,6 +25,11 @@ class Post(models.Model):
             tag, _ = Tag.objects.get_or_create(name=tag_name)
             tag_list.append(tag)
         return tag_list
+
+    # urls 에 detail 경로를 정의 할 경우... model 에 get_absolute_url 함수를 가능할 정의 할것
+    def get_absolute_url(self):
+        # return reverse("instagram:post_detail", kwargs={"pk": self.pk}) # 동일한 코드
+        return reverse("instagram:post_detail", args=[self.pk])     # 동일한 코드
 
 
 class Tag(models.Model):

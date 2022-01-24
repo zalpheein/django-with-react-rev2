@@ -1,8 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from .forms import PostForm
-from .models import Tag
+from .models import Post, Tag
 
 
 @login_required
@@ -31,8 +31,9 @@ def post_new(request):
 
             messages.success(request, "포스팅을 저장 하였습니다.")
 
-            # 만약 인자로 post 를 사용 하려면, models에 get_absolute_url 함수가 정의 되어야 함
-            return redirect("/")
+            # 만약 인자로 post 를 사용 하려면, models 에 get_absolute_url 함수가 정의 되어야 함
+            # return redirect("/")
+            return redirect(post)
     else:
         form = PostForm()
 
@@ -40,3 +41,35 @@ def post_new(request):
     return render(request, "instagram/post_form.html", {
         "form": form,
     })
+
+
+# 다음과 같이 3가지 방식으로 post_detail 를 구현 할 수 있다..여기서는 첫번째 방식으로
+# 순수 자체 제작 함수
+# DetailView() 사용
+# DetailView 를 상속 받은 클래스를 사용
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, "instagram/post_detail.html", {
+        "post": post,
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
