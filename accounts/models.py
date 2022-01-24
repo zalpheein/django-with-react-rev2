@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 from django.core.mail import send_mail
 from django.core.validators import RegexValidator
 from django.db import models
+from django.shortcuts import resolve_url
 from django.template.loader import render_to_string
 
 
@@ -28,6 +29,14 @@ class User(AbstractUser):
     @property
     def name(self):
         return f"{self.first_name} {self.last_name}"
+
+    # 글 작성자 정보 앞에 표시할 아바타 이미지를 표시 할 목적으로 속성 추가
+    @property
+    def avatar_url(self):
+        if self.avatar:
+            return self.avatar.url
+        else:
+            return resolve_url("pydenticon_image", self.username)
 
     def send_welcome_email(self):
         # 제목과 내용을 하드 코딩 할 수 있으나...템플릿을 활용 하기를 추천...(템플릿 파일명은 무관함)
