@@ -19,7 +19,7 @@
             </div>
             <div class="col-sm-12">
                 {% for post in post_list %}
-                    {{ post.photo.url }}
+                    <img src="{{ post.photo.url }}" alt="{{ post.caption }}">
                 {% endfor %}
             </div>
 
