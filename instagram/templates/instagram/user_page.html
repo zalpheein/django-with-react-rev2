@@ -18,7 +18,9 @@
                 {{ page_user.name }}
             </div>
             <div class="col-sm-12">
-                {{ post_list }}
+                {% for post in post_list %}
+                    {{ post.photo.url }}
+                {% endfor %}
             </div>
 
         </div>
