@@ -35,12 +35,7 @@ STATICFILES_DIRS 에서 정의 한 정적파일 위치 askcompany/static/ 여기
                                 <a class="p-2 text-dark" href="#">사람 찾기</a>
                                 <a class="p-2 text-dark" href="#">활동 피드</a>
                                 <a class="p-2 text-dark" href="{% url 'profile_edit' %}">
-                                    {% if user.avatar %}
-                                        <img src="{{ user.avatar.url }}" alt="" style="width: 24px" />
-                                        {{ user }}
-                                    {% else %}
-
-                                    {% endif %}
+                                    <img src="{{ user.avatar.url }}" class="rounded-circle" alt="" style="width: 24px" />
                                 </a>
                             </nav>
                             <a class="btn btn-outline-primary" href="#">Sign up</a>

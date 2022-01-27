@@ -45,7 +45,7 @@ def post_new(request):
 
 
 # 다음과 같이 3가지 방식으로 post_detail 를 구현 할 수 있다..여기서는 첫번째 방식으로
-# 순수 자체 제작 함수
+# 함수 기반 뷰(순수 자체 제작 함수)
 # DetailView() 사용
 # DetailView 를 상속 받은 클래스를 사용
 def post_detail(request, pk):
@@ -55,7 +55,11 @@ def post_detail(request, pk):
     })
 
 
+# 다음과 같이 3가지 방식으로 구현 할 수 있으나 여기서는 "함수 기반 뷰(순수 자체 제작 함수)"로 제작
+def user_page(request, username):
+    render(request, "instagram/user_page.html", {
 
+    })
 
 
 
