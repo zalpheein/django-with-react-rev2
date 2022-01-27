@@ -32,6 +32,7 @@ def post_new(request):
             messages.success(request, "포스팅을 저장 하였습니다.")
 
             # 만약 인자로 post 를 사용 하려면, models 에 get_absolute_url 함수가 정의 되어야 함
+            # 인자로 post 를 넘기므로... 글 작성 후, post_detail 페이지로 이동
             # return redirect("/")
             return redirect(post)
     else:

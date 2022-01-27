@@ -26,7 +26,7 @@ class Post(models.Model):
             tag_list.append(tag)
         return tag_list
 
-    # urls 에 detail 경로를 정의 할 경우... model 에 get_absolute_url 함수를 가능할 정의 할것
+    # urls 에 post 에 대한 detail 경로를 정의 할 경우... model 에 get_absolute_url 함수를 가능할 정의 할것
     def get_absolute_url(self):
         # return reverse("instagram:post_detail", kwargs={"pk": self.pk}) # 동일한 코드
         return reverse("instagram:post_detail", args=[self.pk])     # 동일한 코드
