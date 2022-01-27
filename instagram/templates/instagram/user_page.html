@@ -4,8 +4,13 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <img src="{{ user.avatar_url }}" alt="" class="rounded-circle">
-
+                <img src="{{ current_user.avatar_url }}" alt="" class="rounded-circle" style="width:256px; height:256px;">
+                {{ current_user.username }}
+                <a href="{% url 'profile_edit' %}" class="href">Edit Profile</a>
+                <hr>
+                0 posts, 0 follower, 0 following
+                <hr>
+                {{ current_user.name }}
             </div>
         </div>
     </div>

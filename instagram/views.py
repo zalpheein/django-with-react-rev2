@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import PostForm
@@ -57,9 +58,12 @@ def post_detail(request, pk):
 
 # 다음과 같이 3가지 방식으로 구현 할 수 있으나 여기서는 "함수 기반 뷰(순수 자체 제작 함수)"로 제작
 def user_page(request, username):
+    # 현재 로그인 유저를 뽑아 와야 하므로...
+    # get_user_model 을 이용하여 username 으로 찾고, 실제 접근이 허용된 사람만 뽑아 옴
+    current_user = get_object_or_404(get_user_model(), username=username, is_active=True)
 
     return render(request, "instagram/user_page.html", {
-
+        "current_user": current_user
     })
 
 
