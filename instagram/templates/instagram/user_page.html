@@ -17,11 +17,13 @@
                 <hr>
                 {{ page_user.name }}
             </div>
-            <div class="col-sm-12">
-                {% for post in post_list %}
-                    <img src="{{ post.photo.url }}" alt="{{ post.caption }}">
-                {% endfor %}
-            </div>
+
+            {% for post in post_list %}
+                <div class="col-sm-4">
+                    <img src="{{ post.photo.url }}" alt="{{ post.caption }}" style="width: 100%">
+                </div>
+            {% endfor %}
+
 
         </div>
     </div>
