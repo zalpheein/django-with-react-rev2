@@ -60,10 +60,11 @@ def post_detail(request, pk):
 def user_page(request, username):
     # 현재 로그인 유저를 뽑아 와야 하므로...
     # get_user_model 을 이용하여 username 으로 찾고, 실제 접근이 허용된 사람만 뽑아 옴
-    current_user = get_object_or_404(get_user_model(), username=username, is_active=True)
-
+    page_user = get_object_or_404(get_user_model(), username=username, is_active=True)
+    post_list = Post.objects.filter(author=page_user)
     return render(request, "instagram/user_page.html", {
-        "current_user": current_user
+        "page_user": page_user,
+        "post_list": post_list,
     })
 
 
