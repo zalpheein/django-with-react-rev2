@@ -3,3 +3,17 @@ django~=3.0.0
 django-bootstrap4
 pillow
 #django-pydenticon      # 설치 할지 말것...
+easy-thumbnails         # https://github.com/SmileyChris/easy-thumbnails
+
+
+
+
+
+
+
+
+
+
+
+
+
