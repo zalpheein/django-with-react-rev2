@@ -62,9 +62,15 @@ def user_page(request, username):
     # get_user_model 을 이용하여 username 으로 찾고, 실제 접근이 허용된 사람만 뽑아 옴
     page_user = get_object_or_404(get_user_model(), username=username, is_active=True)
     post_list = Post.objects.filter(author=page_user)
+
+    # post_list.count() 는 실제 디비에 질의를 던짐...
+    post_list_count = post_list.count()
+    # len(post_list) 의 경우, post_list 전체를 가져와서 다시 메모리로 얻지고.. 메모리상의 리스트 개수를 반환..
+    # 그래서 post_list 의 개수가 많을 경우 속도 저하 문제 발생 예상
     return render(request, "instagram/user_page.html", {
         "page_user": page_user,
         "post_list": post_list,
+        "post_list_count": post_list_count,
     })
 
 
