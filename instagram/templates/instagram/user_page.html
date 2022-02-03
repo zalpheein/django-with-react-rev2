@@ -5,7 +5,14 @@
     <div class="container">
         <div class="row pt-5 pb-5">
             <div class="col-sm-3" style="text-align: center">
+                <!--
                 <img src="{{ page_user.avatar_url }}" alt="" class="rounded-circle" style="width:256px; height:256px;">
+                    {{ page_user.avatar  }}
+                    accounts/avatar/2022/01/18/2018-03-06_01-46-53.png
+                    easy-thumbnails 을 활용하여 이미지를 지정한 크기로 crop 한 후, 노출
+                        작게 crop 한 후, 크게 노출 할 경우, 이미지가 뭉그러져보임
+                -->
+                <img src="{% thumbnail page_user.avatar 512x512 crop %}" alt="" class="rounded-circle" style="width:256px; height:256px;">
             </div>
 
             <div class="col-sm-9">
