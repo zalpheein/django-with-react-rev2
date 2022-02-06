@@ -23,8 +23,6 @@
         Suggestions for you
     </div>
     <div class="card-body text_muted">
-        {{ user.avatar_url }}<br />
-        {{ user.username }}<br />
-        <butt>Follow</butt>
+        {% include "instagram/timeline_sidebar_user_follow.html" %}
     </div>
 </div>
