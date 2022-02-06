@@ -1,8 +1,13 @@
 
-<div class="d-flex">
-    <img src="{{ user.avatar_url }}" alt="" style="width:48px; height:48px" class="rounded-circle"  />
+<div class="d-flex p-2">
+    <div class="mr-2">
+        <img src="{{ user.avatar_url }}" alt="" style="width:48px; height:48px" class="rounded-circle"  />
 
-    {{ user.username }}<br />
-    {{ user.name }}
+    </div>
+    <div>
+        {{ user.username }}<br />
+        <small class="text_muted">{{ user.name }}</small>
+    </div>
+
 </div>
 
