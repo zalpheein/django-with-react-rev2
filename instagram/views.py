@@ -7,6 +7,12 @@ from .models import Post, Tag
 
 
 @login_required
+def index(request):
+    return render(request, "instagram:index.html", {
+
+    })
+
+@login_required
 def post_new(request):
     if request.method == "POST":
         # PostForm 에 사용자 입력 데이터를 채우라는 의미 +++++++++++++++
