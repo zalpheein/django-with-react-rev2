@@ -8,7 +8,7 @@ from .models import Post, Tag
 
 @login_required
 def index(request):
-    return render(request, "instagram:index.html", {
+    return render(request, "instagram/index.html", {
 
     })
 
