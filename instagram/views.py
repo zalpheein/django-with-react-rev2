@@ -12,7 +12,7 @@ def index(request):
     # User.objects.all() 이렇게 보다는 get_user_model() 을 통해 가져오는 것이 바람직
     suggested_user_list = get_user_model().objects.all()\
         .exclude(pk=request.user.pk)\
-        .exclude(pk__in=request.user.following_set.all())   # 이미 팔로우 한 사람들은 제외
+        .exclude(pk__in=request.user.following_set.all())[0:3]   # 이미 팔로우 한 사람들은 제외
 
     return render(request, "instagram/index.html", {
         "suggested_user_list": suggested_user_list,
