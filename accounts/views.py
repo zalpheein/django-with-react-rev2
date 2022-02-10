@@ -109,9 +109,10 @@ def user_follow(request, username):
     follow_user = get_object_or_404(User, username=username, is_active=True)
 
     # request.user 가 follow_user 를 팔로우 할려고 한다.
-    request.user.follower_set
-    request.user.following_set
+    request.user.following_set.add(follow_user)
 
+    # follow_user 는 request.user 에 의해 팔로잉 한다.
+    follow_user.follower_set.add(request.user)
 
     messages.success(request, f"{follow_user}님을 팔로우 했습니다.")
 
@@ -125,6 +126,12 @@ def user_follow(request, username):
 @login_required
 def user_unfollow(request, username):
     unfollow_user = get_object_or_404(User, username=username, is_active=True)
+
+    # request.user 가 follow_user 를 언팔로우 할려고 한다.
+    request.user.following_set.remove(unfollow_user)
+
+    # follow_user 는 request.user 에 의해 언팔로잉 한다.
+    unfollow_user.follower_set.remove(request.user)
 
     messages.success(request, f"{unfollow_user}님을 언팔로우 했습니다.")
 
