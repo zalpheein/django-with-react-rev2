@@ -108,6 +108,11 @@ password_change = PasswordChangeView.as_view()
 def user_follow(request, username):
     follow_user = get_object_or_404(User, username=username, is_active=True)
 
+    # request.user 가 follow_user 를 팔로우 할려고 한다.
+    request.user.follower_set
+    request.user.following_set
+
+
     messages.success(request, f"{follow_user}님을 팔로우 했습니다.")
 
     # 팔로우 처리 완료 후, 요청 페이지로 돌아감... 이전 페이지는 레퍼러를 참조하여 알아냄
