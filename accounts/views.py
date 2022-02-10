@@ -103,3 +103,11 @@ class PasswordChangeView(LoginRequiredMixin, AuthPasswordChangeView):
 password_change = PasswordChangeView.as_view()
 
 
+@login_required
+def user_follow(request):
+    pass
+
+
+@login_required
+def user_unfollow(request):
+    pass
