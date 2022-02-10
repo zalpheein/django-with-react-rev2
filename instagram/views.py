@@ -8,8 +8,12 @@ from .models import Post, Tag
 
 @login_required
 def index(request):
-    return render(request, "instagram/index.html", {
+    # 팔로워/팔로잉 User 목록을 조사
+    # User.objects.all() 이렇게 보다는 get_user_model() 을 통해 가져오는 것이 바람직
+    suggested_user_list = get_user_model().objects.all().exclude(pk=request.user.pk)
 
+    return render(request, "instagram/index.html", {
+        "suggested_user_list": suggested_user_list,
     })
 
 @login_required
