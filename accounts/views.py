@@ -8,9 +8,10 @@ from django.contrib.auth.views import (
     LoginView, logout_then_login,
     PasswordChangeView as AuthPasswordChangeView,
 )
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
 from .forms.forms import SignupForm, ProfileForm, PasswordChangeForm
+from .models import User
 
 # 로그인 구현
 #   순수 자체 제작 함수
@@ -102,12 +103,30 @@ class PasswordChangeView(LoginRequiredMixin, AuthPasswordChangeView):
 
 password_change = PasswordChangeView.as_view()
 
-
+# 팔로우 할 대상 username 을 인자로 넘겨야
 @login_required
-def user_follow(request):
-    pass
+def user_follow(request, username):
+    follow_user = get_object_or_404(User, username=username, is_active=True)
+
+    messages.success(request, f"{follow_user}님을 팔로우 했습니다.")
+
+    # 팔로우 처리 완료 후, 요청 페이지로 돌아감... 이전 페이지는 레퍼러를 참조하여 알아냄
+    # 레퍼러가 있으면 가져오고 없으면 root 를 반환
+    redirect_url = request.META.get("HTTP_REFERER", "root")
+    return redirect(redirect_url)
 
 
+# 언팔로우 할 대상 username 을 인자로 넘겨야
 @login_required
-def user_unfollow(request):
-    pass
+def user_unfollow(request, username):
+    unfollow_user = get_object_or_404(User, username=username, is_active=True)
+
+    messages.success(request, f"{unfollow_user}님을 언팔로우 했습니다.")
+
+    # 언팔로우 처리 완료 후, 요청 페이지로 돌아감... 이전 페이지는 레퍼러를 참조하여 알아냄
+    # 레퍼러가 있으면 가져오고 없으면 root 를 반환
+    redirect_url = request.META.get("HTTP_REFERER", "root")
+    return redirect(redirect_url)
+
+
+
