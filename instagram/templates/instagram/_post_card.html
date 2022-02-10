@@ -1,0 +1,19 @@
+<div class="card">
+    <div class="card-header">
+        <!-- accounts.models.User 에 속성으로 정의한 avatar_url 을 사용하여 아바타 이미지 노출 -->
+        <img src="{{ post.author.avatar_url }}" alt="" style="width:32px; height:32px;" />
+        <!-- 여기서 name 은 accounts.models.User 에 속성(property)으로 정의 됨 -->
+        {{ post.author.name }}
+    </div>
+    <div class="card-body">
+        <!-- 만약 photo 필드가 필수가 아닌 경우, if 문으로 예외 처리가 필요 함 -->
+        <img src="{{ post.photo.url }}" alt="{{ post.photo.caption }}">
+    </div>
+    <div class="card-footer">
+        {% for tag in post.tag_set.all %}
+            <span class="badge badge-primary">
+                #{{ tag }}
+            </span>
+        {% endfor %}
+    </div>
+</div>
