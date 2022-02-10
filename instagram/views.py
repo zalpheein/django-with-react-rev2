@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import PostForm
 from .models import Post, Tag
@@ -10,7 +11,10 @@ from .models import Post, Tag
 def index(request):
     # 팔로잉 한 사람들이 쓴 post 글들의 목록 가져오기
     post_list = Post.objects.all()\
-        .fillter(auth__in=request.user.following_set.all())     # 팔로잉 한 사람들, 이 경우 내글은 않보임..
+        .fillter(
+            Q(author__in=request.user.following_set.all()) |    # 팔로잉 한 사람들, 이 경우 내글은 않보임..
+            Q(author=request.user)                              # 그래서 내가 작성한 글도 포함...
+    )
 
     # 팔로워/팔로잉 User 목록을 조사
     # User.objects.all() 이렇게 보다는 get_user_model() 을 통해 가져오는 것이 바람직
