@@ -9,7 +9,9 @@
         </div>
         <div class="row">
             <div class="col-sm-8">
-                {{ post_list }}
+                {% for post in post_list %}
+                    {{ "카드 레이아웃으로 노출" }}
+                {% endfor %}
             </div>
             <div class="col-sm-4">
                 <!-- 아래 처럼 하나의 html 페이지에서 모든 영역을 구성 할수도 있지만, html 페이지를 영역별로 쪼개서 구성 -->
