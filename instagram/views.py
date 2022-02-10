@@ -11,7 +11,7 @@ from .models import Post, Tag
 def index(request):
     # 팔로잉 한 사람들이 쓴 post 글들의 목록 가져오기
     post_list = Post.objects.all()\
-        .fillter(
+        .filter(
             Q(author__in=request.user.following_set.all()) |    # 팔로잉 한 사람들, 이 경우 내글은 않보임..
             Q(author=request.user)                              # 그래서 내가 작성한 글도 포함...
     )
