@@ -10,6 +10,9 @@
         <div class="row">
             <div class="col-sm-8">
                 Timeline
+                <hr />
+                <!-- 로그인 유저가 팔로잉 하는 모든 사람들을 노출-->
+                {{ user.following_set.all }}
             </div>
             <div class="col-sm-4">
                 <!-- 아래 처럼 하나의 html 페이지에서 모든 영역을 구성 할수도 있지만, html 페이지를 영역별로 쪼개서 구성 -->
