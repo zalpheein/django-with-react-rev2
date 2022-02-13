@@ -20,6 +20,9 @@
                 <a href="{% url 'profile_edit' %}" class="btn btn-secondary btn-sm">
                     Edit Profile
                 </a>
+
+                {{ is_follow }}
+
                 <hr>
                 {{ post_list_count }} posts, 0 follower, 0 following
                 <hr>

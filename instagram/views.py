@@ -88,10 +88,22 @@ def user_page(request, username):
     post_list_count = post_list.count()
     # len(post_list) 의 경우, post_list 전체를 가져와서 다시 메모리로 얻지고.. 메모리상의 리스트 개수를 반환..
     # 그래서 post_list 의 개수가 많을 경우 속도 저하 문제 발생 예상
+
+    # 현재 페이지에 접근한 이용자가 page_user 를 팔로우 했다면 ==> is_follow = True
+    # 현재 페이지에 접근한 이용자가 page_user 를 언팔로우 했다면 ==> is_unfollow = False
+    if request.user.is_authenticated:
+        is_follow = request.user.following_set.filter(pk=page_user.pk).exists()
+    else:
+        is_follow = False
+
+
+
+
     return render(request, "instagram/user_page.html", {
         "page_user": page_user,
         "post_list": post_list,
         "post_list_count": post_list_count,
+        "is_follow": is_follow,
     })
 
 
