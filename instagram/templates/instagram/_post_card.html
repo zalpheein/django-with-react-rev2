@@ -29,13 +29,14 @@
             좋아요 하트 찾기
                 https://fontawesome.com/search?p=1&q=heart&s=solid%2Cbrands
         -->
-
-        {{ post|is_like_user:user }}
-        <a href="{% url 'instagram:post_unlike' post.pk %}" style="color: inherit;">
-            <i class="fa-solid fa-heart"></i>
-        </a>
-        <a href="{% url 'instagram:post_like' post.pk %}" style="color: inherit;">
-            <i class="fa-solid fa-heart-crack"></i>
-        </a>
+        {% if post|is_like_user:user %}
+            <a href="{% url 'instagram:post_unlike' post.pk %}" style="color: inherit;">
+                <i class="fa-solid fa-heart"></i>
+            </a>
+        {% else %}
+            <a href="{% url 'instagram:post_like' post.pk %}" style="color: inherit;">
+                <i class="fa-solid fa-heart-crack"></i>
+            </a>
+        {% endif %}
     </div>
 </div>

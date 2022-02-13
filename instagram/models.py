@@ -68,6 +68,8 @@ class Post(BaseModel):
     def is_like_user(self, user):
         return self.like_user_set.filter(pk=user.pk).exists()
 
+    class Meta:
+        ordering = ['-id']
 
 class Tag(models.Model):
     name = models.CharField(max_length=50, unique=True)
