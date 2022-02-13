@@ -86,6 +86,24 @@ def post_detail(request, pk):
     })
 
 
+@login_required
+def post_like(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    # TODO: like 처리 필요
+    messages.success(request, f"{post}를 좋아 합니다")
+    redirect_url = request.META.get("HTTP_REFERER", "root")
+    return redirect(redirect_url)
+
+
+@login_required
+def post_unlike(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    # TODO: unlike 처리 필요
+    messages.success(request, f"{post}를 좋아요를 취소 합니다")
+    redirect_url = request.META.get("HTTP_REFERER", "root")
+    return redirect(redirect_url)
+
+
 # 다음과 같이 3가지 방식으로 구현 할 수 있으나 여기서는 "함수 기반 뷰(순수 자체 제작 함수)"로 제작
 def user_page(request, username):
     # 현재 로그인 유저를 뽑아 와야 하므로...
