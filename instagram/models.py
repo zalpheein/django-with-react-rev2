@@ -5,7 +5,15 @@ from django.db import models
 from django.urls import reverse
 
 
-class Post(models.Model):
+class BaseModel(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
+class Post(BaseModel):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # 업로드 파일 경로를 정의
     photo = models.ImageField(upload_to="instagram/post/%Y/%m/%d")
@@ -14,8 +22,7 @@ class Post(models.Model):
     tag_set = models.ManyToManyField('Tag', blank=True)
     location = models.CharField(max_length=100, blank=True)
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+
 
     def __str__(self):
         return self.caption
