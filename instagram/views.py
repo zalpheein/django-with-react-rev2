@@ -96,9 +96,6 @@ def user_page(request, username):
     else:
         is_follow = False
 
-
-
-
     return render(request, "instagram/user_page.html", {
         "page_user": page_user,
         "post_list": post_list,
