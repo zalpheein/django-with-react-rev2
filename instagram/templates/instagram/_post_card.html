@@ -1,3 +1,7 @@
+
+<!--사용할 templatetags 를 load-->
+{% load instagram_tags %}
+
 <div class="card">
     <div class="card-header">
         <!-- accounts.models.User 에 속성으로 정의한 avatar_url 을 사용하여 아바타 이미지 노출 -->
@@ -25,6 +29,8 @@
             좋아요 하트 찾기
                 https://fontawesome.com/search?p=1&q=heart&s=solid%2Cbrands
         -->
+
+        {{ post|is_like_user:user }}
         <a href="{% url 'instagram:post_unlike' post.pk %}" style="color: inherit;">
             <i class="fa-solid fa-heart"></i>
         </a>

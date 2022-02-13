@@ -41,8 +41,6 @@ class Post(BaseModel):
                                            related_name="like_post_set",
                                            blank=True)
 
-
-
     def __str__(self):
         return self.caption
 
@@ -59,6 +57,16 @@ class Post(BaseModel):
     def get_absolute_url(self):
         # return reverse("instagram:post_detail", kwargs={"pk": self.pk}) # 동일한 코드
         return reverse("instagram:post_detail", args=[self.pk])     # 동일한 코드
+
+    # 좋아요 상태에 따른 아이콘을 구별 노출 할 목적으로...like_user_set 에 user 가 존재 하는지 질의
+    # 절대로 본 함수를 html 에서 직접 사용할 수 없다.. 그래서 templatetags 기술을 이용한다.
+    #   templatetags 설명
+    #       https://docs.djangoproject.com/ko/4.0/howto/custom-template-tags/
+    #       instagram / templatetags 폴더 생성
+    #       __init__.py 생성
+    #
+    def is_like_user(self, user):
+        return self.like_user_set.filter(pk=user.pk).exists()
 
 
 class Tag(models.Model):
