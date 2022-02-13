@@ -64,7 +64,7 @@ class Post(BaseModel):
     #       https://docs.djangoproject.com/ko/4.0/howto/custom-template-tags/
     #       instagram / templatetags 폴더 생성
     #       __init__.py 생성
-    #
+    #       py 파일 생성 및 내용 구성
     def is_like_user(self, user):
         return self.like_user_set.filter(pk=user.pk).exists()
 
