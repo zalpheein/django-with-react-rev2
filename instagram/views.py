@@ -89,7 +89,10 @@ def post_detail(request, pk):
 @login_required
 def post_like(request, pk):
     post = get_object_or_404(Post, pk=pk)
+
     # TODO: like 처리 필요
+    post.like_user_set.add(request.user)
+
     messages.success(request, f"{post}를 좋아 합니다")
     redirect_url = request.META.get("HTTP_REFERER", "root")
     return redirect(redirect_url)
@@ -98,7 +101,10 @@ def post_like(request, pk):
 @login_required
 def post_unlike(request, pk):
     post = get_object_or_404(Post, pk=pk)
+
     # TODO: unlike 처리 필요
+    post.like_user_set.remove(request.user)
+
     messages.success(request, f"{post}를 좋아요를 취소 합니다")
     redirect_url = request.META.get("HTTP_REFERER", "root")
     return redirect(redirect_url)
