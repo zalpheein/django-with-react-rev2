@@ -1,19 +1,27 @@
+from datetime import timedelta
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
 from .forms import PostForm
 from .models import Post, Tag
 
 
 @login_required
 def index(request):
+    # 현재 시간에서 3일 전 시간을 뺀 ==> 즉, 3일전 시간
+    timesince = timezone.now() - timedelta(days=3)
+
     # 팔로잉 한 사람들이 쓴 post 글들의 목록 가져오기
     post_list = Post.objects.all()\
         .filter(
             Q(author__in=request.user.following_set.all()) |    # 팔로잉 한 사람들, 이 경우 내글은 않보임..
             Q(author=request.user)                              # 그래서 내가 작성한 글도 포함...
+        )\
+        .filter(
+            created_at__gte=timesince       # 최근 3일 이내 올라온 글 목록
     )
 
     # 팔로워/팔로잉 User 목록을 조사
@@ -26,6 +34,7 @@ def index(request):
         "post_list": post_list,
         "suggested_user_list": suggested_user_list,
     })
+
 
 @login_required
 def post_new(request):
