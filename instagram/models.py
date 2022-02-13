@@ -14,13 +14,32 @@ class BaseModel(models.Model):
 
 
 class Post(BaseModel):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # author 와 like_user_set 가 충돌이남...DB 단 충돌이 아닌.. ORM 에서의 충돌
+    # 특정 user 가 작성한 글 불러오는 방법 2가지
+    #   Post.objects.filter(author=user)
+    #   user.post_set.all()
+    # author 와 like_user_set 가 동일한 명칭(post_set) 의 사용이 충돌 원인
+    # 충돌 방지를 위해 related_name 을 정의...
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,
+                               related_name="my_post_set",
+                               on_delete=models.CASCADE)
+
     # 업로드 파일 경로를 정의
     photo = models.ImageField(upload_to="instagram/post/%Y/%m/%d")
     caption = models.CharField(max_length=500)
     # 만약 ManyToManyField(Tag, blank=True) 와 같이 표현 하려면... class Tag 를 class Post 이전에 정의
     tag_set = models.ManyToManyField('Tag', blank=True)
     location = models.CharField(max_length=100, blank=True)
+
+    # author 와 like_user_set 가 충돌이남...DB 단 충돌이 아닌.. ORM 에서의 충돌
+    # 특정 user 가 작성한 글 불러오는 방법 2가지
+    #   Post.objects.filter(author=user)
+    #   user.post_set.all()
+    # author 와 like_user_set 가 동일한 명칭(post_set) 의 사용이 충돌 원인
+    # 충돌 방지를 위해 related_name 을 정의
+    like_user_set = models.ManyToManyField(settings.AUTH_USER_MODEL,
+                                           related_name="like_post_set",
+                                           blank=True)
 
 
 
