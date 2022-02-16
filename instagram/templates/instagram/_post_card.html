@@ -8,7 +8,6 @@
         <img src="{{ post.author.avatar_url }}" alt="" style="width:32px; height:32px;" />
         <!--
             여기서 name 은 accounts.models.User 에 속성(property)으로 정의 됨
-
             링크 주소 : http://127.0.0.1:8000/instagram/zalphee/
         -->
         <a href="{% url "instagram:user_page" post.author.username  %}">
@@ -18,33 +17,38 @@
     <div class="card-body">
         <!-- 만약 photo 필드가 필수가 아닌 경우, if 문으로 예외 처리가 필요 함 -->
         <img src="{{ post.photo.url }}" alt="{{ post.photo.caption }}" style="width: 100%; height:100%;">
-        {% for tag in post.tag_set.all %}
-            <span class="badge badge-primary">
-                #{{ tag }}
-            </span>
-        {% endfor %}
-    </div>
-    <div class="card-footer">
+
         <!--
             좋아요 하트 찾기
                 https://fontawesome.com/search?p=1&q=heart&s=solid%2Cbrands
-        -->
-        {% if post.is_like_user %}
-            가
-        {% else %}
-            나
-        {% endif %}
 
-        {% if post|is_like_user:user %}
-            A
-            <a href="{% url 'instagram:post_unlike' post.pk %}" style="color: inherit;">
-                <i class="fa-solid fa-heart"></i>
-            </a>
-        {% else %}
-            B
-            <a href="{% url 'instagram:post_like' post.pk %}" style="color: inherit;">
-                <i class="fa-solid fa-heart-crack"></i>
-            </a>
-        {% endif %}
+            {% if post.is_like_user %}
+                가
+            {% else %}
+                나
+            {% endif %}
+        -->
+        <div>
+            {% if post|is_like_user:user %}
+                <a href="{% url 'instagram:post_unlike' post.pk %}" style="color: inherit;">
+                    <i class="fa-solid fa-heart"></i>
+                </a>
+            {% else %}
+                <a href="{% url 'instagram:post_like' post.pk %}" style="color: inherit;">
+                    <i class="fa-solid fa-heart-crack"></i>
+                </a>
+            {% endif %}
+        </div>
+
+        <div>
+            {% for tag in post.tag_set.all %}
+                <span class="badge badge-primary">
+                    #{{ tag }}
+                </span>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="card-footer">
+
     </div>
 </div>
