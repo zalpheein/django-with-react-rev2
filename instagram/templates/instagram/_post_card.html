@@ -1,6 +1,6 @@
 
 <!--사용할 templatetags 를 load-->
-{% load instagram_tags %}
+{% load humanize instagram_tags  %}
 
 <div class="card">
     <div class="card-header">
@@ -47,7 +47,7 @@
                 </span>
             {% endfor %}
         </div>
-        {{ post.created_at }}
+        {{ post.created_at|naturaltime }}
     </div>
     <div class="card-footer">
 
