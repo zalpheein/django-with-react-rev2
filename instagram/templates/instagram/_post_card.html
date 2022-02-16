@@ -47,7 +47,14 @@
                 </span>
             {% endfor %}
         </div>
-        {{ post.created_at|naturaltime }}
+
+        <div>
+            <a href="{{ post.get_absolute_url }}" style="" class="text-muted" >
+                <small>
+                    {{ post.created_at|naturaltime }}
+                </small>
+            </a>
+        </div>
     </div>
     <div class="card-footer">
 
