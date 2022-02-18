@@ -77,6 +77,10 @@ class Comment(BaseModel):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     message = models.TextField()
 
+    # 사용자 정의하는 모델들의 정렬을 정의 하는 것이 바람직
+    class Meta:
+        ordering = ['-id']
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=50, unique=True)

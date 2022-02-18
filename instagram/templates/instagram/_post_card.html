@@ -40,6 +40,8 @@
             {% endif %}
         </div>
 
+        {{ post.comment_set.all }}
+
         <div>
             {% for tag in post.tag_set.all %}
                 <span class="badge badge-primary">
@@ -57,6 +59,6 @@
         </div>
     </div>
     <div class="card-footer">
-        댓글 쓰기 시작
+        <a href="{% url 'instagram:comment_new' post.pk %}">댓글 쓰기</a>
     </div>
 </div>

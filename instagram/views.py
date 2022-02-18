@@ -5,14 +5,14 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 from .models import Post, Tag
 
 
 @login_required
 def index(request):
-    # 현재 시간에서 3일 전 시간을 뺀 ==> 즉, 3일전 시간
-    timesince = timezone.now() - timedelta(days=3)
+    # 현재 시간에서 3일 전 시간을 뺀 ==> 즉, 30일전 시간
+    timesince = timezone.now() - timedelta(days=30)
 
     # 팔로잉 한 사람들이 쓴 post 글들의 목록 가져오기
     post_list = Post.objects.all()\
@@ -108,6 +108,27 @@ def post_unlike(request, pk):
     messages.success(request, f"포스팅 {post.pk}의 좋아요를 취소 합니다")
     redirect_url = request.META.get("HTTP_REFERER", "root")
     return redirect(redirect_url)
+
+
+@login_required
+def comment_new(request, post_pk):
+    post = get_object_or_404(Post, pk=post_pk)
+
+    if request.method == "POST":
+        form = CommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.author = request.user
+            comment.save()
+
+            return redirect(comment.post)
+    else:
+        form = CommentForm()
+
+    return render(request, "instagram/comment_form.html", {
+        "form": form,
+    })
 
 
 # 다음과 같이 3가지 방식으로 구현 할 수 있으나 여기서는 "함수 기반 뷰(순수 자체 제작 함수)"로 제작
