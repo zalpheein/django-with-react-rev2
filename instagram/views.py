@@ -30,6 +30,11 @@ def index(request):
         .exclude(pk=request.user.pk)\
         .exclude(pk__in=request.user.following_set.all())[0:3]   # 이미 팔로우 한 사람들은 제외
 
+    # 참고로
+    # def index 에서 instagram/index.html 의 _post_form.html 을 호출
+    # def post_detail 에서 instagram/post_detail.html 의 _post_form.html 을 호출
+    # 하지만 댓글폼의 노출은 오직 instagram/post_detail.html 에서만 노출 됨
+    # why? def post_detail 에서만 comment_form 을 인자로 넘기기 때문
     return render(request, "instagram/index.html", {
         "post_list": post_list,
         "suggested_user_list": suggested_user_list,
@@ -81,8 +86,16 @@ def post_new(request):
 # DetailView 를 상속 받은 클래스를 사용
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    comment_form = CommentForm()
+
+    # 참고로
+    # def index 에서 instagram/index.html 의 _post_form.html 을 호출
+    # def post_detail 에서 instagram/post_detail.html 의 _post_form.html 을 호출
+    # 하지만 댓글폼의 노출은 오직 instagram/post_detail.html 에서만 노출 됨
+    # why? def post_detail 에서만 comment_form 을 인자로 넘기기 때문
     return render(request, "instagram/post_detail.html", {
         "post": post,
+        "comment_form": comment_form,
     })
 
 
