@@ -40,7 +40,11 @@
             {% endif %}
         </div>
 
-        {{ post.comment_set.all }}
+        {% for comment in post.comment_set.all %}
+            {{ comment.author }}
+            {{ comment.message }}
+            {{ comment.created_at|naturaltime }}
+        {% endfor %}
 
         <div>
             {% for tag in post.tag_set.all %}
