@@ -40,11 +40,16 @@
             {% endif %}
         </div>
 
-        {% for comment in post.comment_set.all %}
-            {{ comment.author }}
-            {{ comment.message }}
-            {{ comment.created_at|naturaltime }}
-        {% endfor %}
+        <div class="comment-list mb-3" >
+            {% for comment in post.comment_set.all %}
+            <div class="comment">
+                <strong>{{ comment.author }}</strong>
+                {{ comment.message }}
+                <small style="text-muted">{{ comment.created_at|naturaltime }}</small>
+
+            </div>
+            {% endfor %}
+        </div>
 
         <div>
             {% for tag in post.tag_set.all %}
