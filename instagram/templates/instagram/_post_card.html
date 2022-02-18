@@ -1,6 +1,6 @@
 
 <!--사용할 templatetags 를 load-->
-{% load humanize instagram_tags  %}
+{% load bootstrap4 humanize instagram_tags  %}
 
 <div class="card">
     <div class="card-header">
@@ -75,6 +75,6 @@
     <div class="card-footer">
         <a href="{% url 'instagram:comment_new' post.pk %}">댓글 쓰기</a>
 
-        {{ comment_form }}
+        {% bootstrap_form comment_form %}
     </div>
 </div>
