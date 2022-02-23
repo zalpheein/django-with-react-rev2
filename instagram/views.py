@@ -35,9 +35,13 @@ def index(request):
     # def post_detail 에서 instagram/post_detail.html 의 _post_form.html 을 호출
     # 하지만 댓글폼의 노출은 오직 instagram/post_detail.html 에서만 노출 됨
     # why? def post_detail 에서만 comment_form 을 인자로 넘기기 때문
+
+    # 하지만 _post_form.html 에서 comment_form 을 사용하므로, 아래 라인 추가함.
+    comment_form = CommentForm()
     return render(request, "instagram/index.html", {
         "post_list": post_list,
         "suggested_user_list": suggested_user_list,
+        "comment_form": comment_form,
     })
 
 
